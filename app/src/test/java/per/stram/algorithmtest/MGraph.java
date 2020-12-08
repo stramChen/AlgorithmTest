@@ -3,7 +3,7 @@ package per.stram.algorithmtest;
 /**
  * des:图的邻接矩阵存储形式
  *
- * @author: chensc@mxchip.com
+ * @author: chensichuang@jd.com
  * @date: 2019/10/29 5:28 PM
  */
 public class MGraph {

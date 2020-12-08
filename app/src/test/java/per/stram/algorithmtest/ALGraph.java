@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * des:图的邻接表存储形式
  *
- * @author: chensc@mxchip.com
+ * @author: chensichuang@jd.com
  * @date: 2019/10/29 5:36 PM
  */
 public class ALGraph {
