@@ -14,40 +14,40 @@ public class Search {
     @Test
     public void main() {
         TNode tNode = insertBST(null, 14);
-        insertBST(tNode, 4);
-        insertBST(tNode, 9);
-        insertBST(tNode, 11);
-        insertBST(tNode, 10);
-        insertBST(tNode, 21);
-        insertBST(tNode, 2);
-        insertBST(tNode, 3);
-        insertBST(tNode, 98);
-        insertBST(tNode, 6);
-        insertBST(tNode, 5);
+//        insertBST(tNode, 4);
+//        insertBST(tNode, 9);
+//        insertBST(tNode, 11);
+//        insertBST(tNode, 10);
+//        insertBST(tNode, 21);
+//        insertBST(tNode, 2);
+//        insertBST(tNode, 3);
+//        insertBST(tNode, 98);
+//        insertBST(tNode, 6);
+//        insertBST(tNode, 5);
 
         deleteBST(tNode, 14);
-        TNode tNode1 = searchBSTByRecursion(tNode, 14);
-        System.out.print(null == tNode1 ? "未找到\n" : tNode1.value + "\n");
-        TNode tNode2 = searchBSTByRecursion(tNode, 4);
-        System.out.print(null == tNode2 ? "未找到\n" : tNode2.value + "\n");
-        TNode tNode3 = searchBSTByRecursion(tNode, 9);
-        System.out.print(null == tNode3 ? "未找到\n" : tNode3.value + "\n");
-        TNode tNode4 = searchBSTByRecursion(tNode, 11);
-        System.out.print(null == tNode4 ? "未找到\n" : tNode4.value + "\n");
-        TNode tNode5 = searchBSTByRecursion(tNode, 2);
-        System.out.print(null == tNode5 ? "未找到\n" : tNode5.value + "\n");
-        TNode tNode6 = searchBSTByRecursion(tNode, 21);
-        System.out.print(null == tNode6 ? "未找到\n" : tNode6.value + "\n");
-        TNode tNode7 = searchBSTByRecursion(tNode, 98);
-        System.out.print(null == tNode7 ? "未找到\n" : tNode7.value + "\n");
-        TNode tNode8 = searchBSTByRecursion(tNode, 3);
-        System.out.print(null == tNode8 ? "未找到\n" : tNode8.value + "\n");
-        TNode tNode9 = searchBSTByRecursion(tNode, 6);
-        System.out.print(null == tNode9 ? "未找到\n" : tNode9.value + "\n");
-        TNode tNode10 = searchBSTByRecursion(tNode, 5);
-        System.out.print(null == tNode10 ? "未找到\n" : tNode10.value + "\n");
-        TNode tNode11 = searchBSTByRecursion(tNode, 10);
-        System.out.print(null == tNode11 ? "未找到\n" : tNode11.value + "\n");
+//        TNode tNode1 = searchBSTByRecursion(tNode, 14);
+//        System.out.print(null == tNode1 ? "未找到\n" : tNode1.value + "\n");
+//        TNode tNode2 = searchBSTByRecursion(tNode, 4);
+//        System.out.print(null == tNode2 ? "未找到\n" : tNode2.value + "\n");
+//        TNode tNode3 = searchBSTByRecursion(tNode, 9);
+//        System.out.print(null == tNode3 ? "未找到\n" : tNode3.value + "\n");
+//        TNode tNode4 = searchBSTByRecursion(tNode, 11);
+//        System.out.print(null == tNode4 ? "未找到\n" : tNode4.value + "\n");
+//        TNode tNode5 = searchBSTByRecursion(tNode, 2);
+//        System.out.print(null == tNode5 ? "未找到\n" : tNode5.value + "\n");
+//        TNode tNode6 = searchBSTByRecursion(tNode, 21);
+//        System.out.print(null == tNode6 ? "未找到\n" : tNode6.value + "\n");
+//        TNode tNode7 = searchBSTByRecursion(tNode, 98);
+//        System.out.print(null == tNode7 ? "未找到\n" : tNode7.value + "\n");
+//        TNode tNode8 = searchBSTByRecursion(tNode, 3);
+//        System.out.print(null == tNode8 ? "未找到\n" : tNode8.value + "\n");
+//        TNode tNode9 = searchBSTByRecursion(tNode, 6);
+//        System.out.print(null == tNode9 ? "未找到\n" : tNode9.value + "\n");
+//        TNode tNode10 = searchBSTByRecursion(tNode, 5);
+//        System.out.print(null == tNode10 ? "未找到\n" : tNode10.value + "\n");
+//        TNode tNode11 = searchBSTByRecursion(tNode, 10);
+//        System.out.print(null == tNode11 ? "未找到\n" : tNode11.value + "\n");
 
     }
 
@@ -110,6 +110,12 @@ public class Search {
 //        return null;
 //    }
 
+    /**
+     * 需要考虑父亲节点，待删节点，以及待删节点的子节点
+     * @param root
+     * @param value
+     * @return
+     */
     public TNode deleteBST(TNode root,int value ){
 
         TNode parentNode = null;
@@ -136,6 +142,8 @@ public class Search {
         //else we find the value
         //1.if the node that we want to delete has no child,delete directly
         if(root.rightChild == null && root.leftChild == null){
+            if(parentNode == null) return null;
+            //if the the want to delete is the left node of parent.Delete it.
             if(parentNode.leftChild == root){
                 parentNode.leftChild = null;
             }else {
@@ -143,7 +151,7 @@ public class Search {
             }
         }
         //2.if the node that we want to delete has leftchild
-        if(root.rightChild == null){
+        if(root.leftChild != null){
             if(parentNode.leftChild == root){
                 parentNode.leftChild = root.leftChild;
             }else {
@@ -152,7 +160,7 @@ public class Search {
         }
 
         //2.if the node that we want to delete has right
-        if(root.leftChild == null){
+        if(root.rightChild != null){
             if(parentNode.leftChild == root){
                 parentNode.leftChild = root.rightChild;
             }else {
@@ -161,6 +169,8 @@ public class Search {
         }
 
         //3.if the node that we want to delete both  has right and left child
+        //we delete the precursor node,and give the the value of precurosr to the node we want
+        // to really delete.
         if(root.leftChild!=null && root.rightChild != null){
             //the parent of precursor node
             TNode preNodeParent = null;

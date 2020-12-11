@@ -280,28 +280,32 @@ public class Sort {
     }
 
     /**
-     * time:(t*(10+n))
-     * space
+     * time:(t*(r+n))  int numberRadixSort r=10,mean that 0,1,2,3,4,5,6,7,8,9
+     * space:r
      * steady
-     * @param a
-     * @param t the number or digits
+     * @param a arr
+     * @param t the number or digits,for example 100,t=3.
      */
     public void radixSort(int a[], int t) {
 
-        //the index count of digit
+        //the index location of digit,数字下标所在的位置
         int m = 1;
+        //collect times,收集的次数
         int n=1;
         int bucket[][] = new int[10][a.length];
         int count[] = new int[10];
+        //collect t times in total 一共收集了t 次
         while (n <= t) {
+            //allocte 分配
             for (int i = 0; i < a.length; i++) {
-                //use lsd to find which bucket we shout put in,the result is the muber of  the bucket
+                //use lsd to find which bucket we shout put in,the result is the number of  the bucket
+                //按照低位优先原则，来寻找哪个桶我们需要放置，比如100的是t=1时，因为个位数是0，所以放在0号桶
                 int lsd = a[i] / m % 10;
                 bucket[lsd][count[lsd]] = a[i];
                 //the nex index of bucket we should put
                 count[lsd]++;
             }
-
+            //collcet 收集
             for (int i = 0, k = 0; i < 10; i++) {
                 if (count[i] != 0) {
                     for (int j = 0; j < count[i]; j++) {
